@@ -277,65 +277,1042 @@ function create0922Batch(){
 }
 
 function defaultData(){
-  const data = {
-    schemaVersion: DATA_SCHEMA_VERSION,
-    reportDate: getTodayISO(),
-    batches: [
-      {
-        id:'b0810', name:'0810泰笑飒组', openDate:'2026-08-10', stage:'试接',
-        trackAttendance:true, restToday:false,
-        batchNote:'以上出勤为8月20日记录（应出勤13人，实际出勤12人）；诗承君已于评估后汰换。',
-        people:[
-          makePerson('李长兴', {tag:'班长'}),
-          makePerson('诗清玥', {todayAttend:true}),
-          makePerson('诗林樾', {todayAttend:true}),
-          makePerson('诗靖驰', {todayAttend:true}),
-          makePerson('诗承君', {todayAttend:true, active:false, leaveReason:'经过四天试接，评估汰换：无法定位客户问题，有风险'}),
-          makePerson('诗赫轩', {todayAttend:true}),
-          makePerson('诗允晟', {todayAttend:true}),
-          makePerson('诗煜书', {todayAttend:true}),
-          makePerson('诗政年', {todayAttend:true}),
-          makePerson('诗靖辰', {todayAttend:true}),
-          makePerson('诗静妍', {todayAttend:true}),
-          makePerson('诗书屹', {todayAttend:true}),
-          makePerson('诗贤成', {todayAttend:true}),
-          makePerson('诗渝霖', {todayAttend:false, todayNote:'带家人去医院，请假一天'})
-        ]
-      },
-      {
-        id:'b0812', name:'0812诗道瑞组', openDate:'2026-08-12', stage:'业训',
-        trackAttendance:true, restToday:false,
-        batchNote:'开培共25人，已流失6人，当前在册19人。',
-        people:[
-          ...B0812_ACTIVE_ROSTER.map(detail=>makePerson(getRosterAlias('b0812', detail.name), {todayAttend:detail.todayAttend, todayNote:detail.todayNote || ''})),
-          ...B0812_ATTRITION.map(detail=>makePerson(detail.name, {active:false, leaveReason:detail.reason}))
-        ]
-      },
-      {
-        id:'b0819_shimei', name:'0819诗美伊组', openDate:'2026-08-19', stage:'业训',
-        trackAttendance:true, restToday:false,
-        batchNote:'',
-        people:['诗鸣琅','诗苇洲','诗逍歌','诗鸣宇','诗青樱','诗芊雯','诗芷瞳','诗安宇','诗砚星','诗意妍','诗沐寒','诗嘉许','诗安沁']
-          .map(n=>makePerson(n,{todayAttend:true}))
-      },
-      {
-        id:'b0819_shihui', name:'0819诗惠如组', openDate:'2026-08-19', stage:'业训',
-        trackAttendance:true, restToday:false,
-        batchNote:'',
-        people:['诗阮琴','诗简清','诗艺珊','诗初筝','诗孟芸','诗晏书','诗芷音','诗清洛','诗君安','诗奇煜','诗琼英','诗晏修','诗清越','诗东篱']
-          .map(n=>makePerson(n,{todayAttend:true}))
-      },
-      create0907Batch(),
-      create0922Batch()
-    ]
-  };
-  migrate0819Groups(data);
-  migrateShiXingQiTransfer(data);
-  return data;
+  return JSON.parse(JSON.stringify(BASELINE_DATA));
 }
 
 const STORAGE_KEY = 'batch_dashboard_v1';
-const DATA_SCHEMA_VERSION = 4;
+const DATA_SCHEMA_VERSION = 5;
+const BASELINE_DATA = {
+  "reportDate": "2026-10-18",
+  "batches": [
+    {
+      "id": "b0810",
+      "name": "0810泰笑飒组",
+      "openDate": "2026-08-10",
+      "stage": "上岗",
+      "trackAttendance": true,
+      "restToday": false,
+      "batchNote": "以上出勤为8月20日记录（应出勤13人，实际出勤12人）；诗承君已于评估后汰换。",
+      "people": [
+        {
+          "id": "p_aoukgqkz",
+          "name": "李长兴",
+          "tag": "班长",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_9fu8dp71",
+          "name": "诗清玥",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "家人生病请假一天"
+        },
+        {
+          "id": "p_23kkl07l",
+          "name": "诗林樾",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_wry7htyx",
+          "name": "诗靖驰",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "婚假"
+        },
+        {
+          "id": "p_xs846881",
+          "name": "诗承君",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "经过四天试接，评估汰换：无法定位客户问题，有风险",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_64mdwua1",
+          "name": "诗赫轩",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "家中有事，请假去外地"
+        },
+        {
+          "id": "p_4x36zl2m",
+          "name": "诗允晟",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "家里装修请假，周一正常出勤"
+        },
+        {
+          "id": "p_2sijwsgs",
+          "name": "诗煜书",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "家中有事请假，明天到"
+        },
+        {
+          "id": "p_mcnafc7z",
+          "name": "诗政年",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_daoqtypq",
+          "name": "诗靖辰",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_hjavtpuk",
+          "name": "诗静妍",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_icvtz9a5",
+          "name": "诗书屹",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "凌晨3点多发消息表示智齿导致牙龈肿胀"
+        },
+        {
+          "id": "p_t6hygmhe",
+          "name": "诗贤成",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "爷爷病重照料，申请离职",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_k8z48tjg",
+          "name": "诗渝霖",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "嗓子说不出话，请假一天"
+        }
+      ]
+    },
+    {
+      "id": "b0812",
+      "name": "0812诗道瑞组",
+      "openDate": "2026-08-12",
+      "stage": "上岗",
+      "trackAttendance": true,
+      "restToday": false,
+      "batchNote": "开培共25人，已流失6人，当前在册19人。",
+      "people": [
+        {
+          "id": "p_eusyt06m",
+          "name": "诗庭樾",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": null,
+          "todayNote": "事假"
+        },
+        {
+          "id": "p_4wofgwog",
+          "name": "诗翊辰",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_5dj6vi4q",
+          "name": "诗昱珩",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": false,
+          "todayNote": "病假"
+        },
+        {
+          "id": "p_7o32409f",
+          "name": "诗时帆",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "上个月20号提出，按照1个月流程，去工厂",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_x67roap7",
+          "name": "诗诺然",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_yinlm7e8",
+          "name": "诗知渝",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_phhu3s00",
+          "name": "诗月琪",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "肠胃炎需要回家治疗",
+          "todayAttend": null,
+          "todayNote": "肠胃炎请假"
+        },
+        {
+          "id": "p_pjm9rwqe",
+          "name": "诗翊星",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "病假，请假2天"
+        },
+        {
+          "id": "p_4oki5pg1",
+          "name": "诗子娇",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_pr5ljq37",
+          "name": "李想",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "个人原因，南京看病",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_stx7ma3d",
+          "name": "诗景清",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "按照1个月流程，正常离职，找到工厂工作",
+          "todayAttend": null,
+          "todayNote": "身体原因病假2天"
+        },
+        {
+          "id": "p_lcf9abvt",
+          "name": "诗楚宜",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_9080wskd",
+          "name": "诗翊甜",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "亲人病重，申请离职",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_ut1pairm",
+          "name": "诗煜辰",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "移动业务时间长，不能接受无解场景比例高",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_j3zcf1yg",
+          "name": "诗舒意",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "服务态度问题汰换",
+          "todayAttend": null,
+          "todayNote": "家里急事申请请假"
+        },
+        {
+          "id": "p_8sur7gwl",
+          "name": "诗雅萌",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "丧假3天"
+        },
+        {
+          "id": "p_iabwfs92",
+          "name": "汪有伟",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "有急事需回老家，退出培训",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_4tid2uok",
+          "name": "薛婷婷",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "因和家人沟通9月需要继续上本科，退出培训",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_g4btkopa",
+          "name": "沈益鸣",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "个人行为习惯差，13日早上睡过头，无意愿继续培训，退出",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_1zzj9elv",
+          "name": "王孔阳",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "有急事需回老家，退出培训",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_bgyhe1ms",
+          "name": "左文",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "个人无法适应职场环境，退出培训",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_0s74gz4t",
+          "name": "杨晓康",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "家里有事有其他安排，退出培训",
+          "todayAttend": null,
+          "todayNote": ""
+        }
+      ]
+    },
+    {
+      "id": "b0819_shihui",
+      "name": "诗惠如组",
+      "openDate": "2026-08-19",
+      "stage": "上岗",
+      "trackAttendance": false,
+      "restToday": true,
+      "batchNote": "",
+      "people": [
+        {
+          "id": "p_d7bz9av3",
+          "name": "诗阮琴",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_zlfmkjvb",
+          "name": "诗简清",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "无法接住客户情绪，自我情绪波动大",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_w22mbzru",
+          "name": "诗艺珊",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "胸腔积液严重无法坚持",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_c8ym7063",
+          "name": "诗初筝",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_jujwd42s",
+          "name": "诗孟芸",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "姐姐结婚，请事假"
+        },
+        {
+          "id": "p_2btk0v5m",
+          "name": "诗晏书",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "现场传播负能量-汰换",
+          "todayAttend": null,
+          "todayNote": "病假"
+        },
+        {
+          "id": "p_3yi8egj1",
+          "name": "诗芷音",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_jialud80",
+          "name": "诗清洛",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_xt918bn0",
+          "name": "诗君安",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "请病假"
+        },
+        {
+          "id": "p_0ffiaxio",
+          "name": "诗奇煜",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_c3zenopd",
+          "name": "诗琼英",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_2h6nhf4q",
+          "name": "诗晏修",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "服务态度问题汰换",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_2z3x6jn3",
+          "name": "诗清越",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "转岗人员不适应强度，需要离职",
+          "todayAttend": null,
+          "todayNote": "家中有事"
+        },
+        {
+          "id": "p_lee5t9ay",
+          "name": "诗东篱",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_aa2xqraq",
+          "name": "诗鸣琅",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_vuy4rfaw",
+          "name": "诗苇洲",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "海南人，本地开销大，找赚钱快工作",
+          "todayAttend": false,
+          "todayNote": ""
+        },
+        {
+          "id": "p_ff3y69wt",
+          "name": "诗逍歌",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "成长慢，指标双差，汰换",
+          "todayAttend": false,
+          "todayNote": "结石治疗，请假一天"
+        },
+        {
+          "id": "p_3y3n1i64",
+          "name": "诗鸣宇",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "家人生病提前一周离职，放弃10月工资",
+          "todayAttend": null,
+          "todayNote": "调休一天，昨天已补班"
+        },
+        {
+          "id": "p_gxp0l0ap",
+          "name": "诗青樱",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_s928m9xa",
+          "name": "诗芊雯",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_xs4odv3i",
+          "name": "诗芷瞳",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_eiunja3q",
+          "name": "诗安宇",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_nv9jz5nw",
+          "name": "诗砚星",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_lpkh04k3",
+          "name": "诗意妍",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "压力无法排解，沟通放弃薪资不认可",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_vaq0sfyq",
+          "name": "诗沐寒",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "调休"
+        },
+        {
+          "id": "p_7blkq8sm",
+          "name": "诗嘉许",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "请假时间太久，业务跟不上",
+          "todayAttend": false,
+          "todayNote": "丧假"
+        },
+        {
+          "id": "p_h859i40h",
+          "name": "诗安沁",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "业务压力大无法继续，放弃工资",
+          "todayAttend": null,
+          "todayNote": ""
+        }
+      ]
+    },
+    {
+      "id": "b0907",
+      "name": "0907诗星钰组",
+      "openDate": "2026-09-07",
+      "stage": "试岗",
+      "trackAttendance": true,
+      "restToday": false,
+      "batchNote": "",
+      "people": [
+        {
+          "id": "p_0fpdj2oc",
+          "name": "诗安融",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_u9qaqbx4",
+          "name": "诗弘砚",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_piqnmwuo",
+          "name": "诗瑾书",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_2f5ncmu1",
+          "name": "诗南歆",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_sntw060u",
+          "name": "诗漪霜",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "旷工离职",
+          "todayAttend": null,
+          "todayNote": "旷工为出勤1天"
+        },
+        {
+          "id": "p_0250zkea",
+          "name": "诗乔安",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "小孩生病"
+        },
+        {
+          "id": "p_gj1xk5fb",
+          "name": "诗梦星",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_r9lipohi",
+          "name": "诗意紫",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_199rpv7d",
+          "name": "诗翎乐",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_o4yw58nh",
+          "name": "诗堇橙",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_ajw5n6lg",
+          "name": "诗映禾",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "调休-换班"
+        },
+        {
+          "id": "p_dec3mo41",
+          "name": "诗楚茉",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "对象车祸，需要照顾",
+          "todayAttend": null,
+          "todayNote": "事假"
+        },
+        {
+          "id": "p_v2l0zmvr",
+          "name": "诗妍菲",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_eqxy0hkn",
+          "name": "诗颜可",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "脚受伤请假"
+        },
+        {
+          "id": "p_6iapv4r3",
+          "name": "诗霜傲",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "调休"
+        },
+        {
+          "id": "p_6bpc4cjr",
+          "name": "诗心妤",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_ya5d1gvp",
+          "name": "诗芊雪",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_eqkv2qye",
+          "name": "诗修涯",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "下午到岗"
+        },
+        {
+          "id": "p_wkvjl1br",
+          "name": "诗星祺",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "无法失业业务压力，联系不上离职",
+          "todayAttend": null,
+          "todayNote": ""
+        }
+      ]
+    },
+    {
+      "id": "b0922",
+      "name": "0922诗佑琪组",
+      "openDate": "2026-09-22",
+      "stage": "试接",
+      "trackAttendance": true,
+      "restToday": false,
+      "batchNote": "",
+      "people": [
+        {
+          "id": "p_je3ma7c8",
+          "name": "诗碧青",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": "丧假"
+        },
+        {
+          "id": "p_api8nuxs",
+          "name": "诗晴茉",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "业务压力大无法适应，放弃工资离职",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_ial4al3r",
+          "name": "诗恩夏",
+          "tag": "",
+          "placeholder": false,
+          "active": false,
+          "leaveReason": "业务压力大无法适应，放弃工资离职",
+          "todayAttend": null,
+          "todayNote": ""
+        },
+        {
+          "id": "p_d4p0dek6",
+          "name": "诗佳柠",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_0m525zd8",
+          "name": "诗珞安",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_jnv7pg5q",
+          "name": "诗梦青",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_jnibleff",
+          "name": "诗苏淮",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_0e1pxxd7",
+          "name": "诗芳洲",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_ewb23hvl",
+          "name": "诗山青",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_hhdonndg",
+          "name": "诗雪淞",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_9h2sd1t1",
+          "name": "诗樱洛",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_wh6f0nqx",
+          "name": "诗苏浅",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_mzx7m64h",
+          "name": "诗涵伊",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_lj2r0jwo",
+          "name": "诗逸可",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        },
+        {
+          "id": "p_1rhunmgz",
+          "name": "诗奚若",
+          "tag": "",
+          "placeholder": false,
+          "active": true,
+          "leaveReason": "",
+          "todayAttend": true,
+          "todayNote": ""
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 5
+};
 const STAGE_OPTIONS = ['业训', '试接', '试岗', '上岗'];
 const BATCH_DISPLAY_NAMES = {
   b0810: '0810泰笑飒组',
@@ -500,7 +1477,7 @@ function normalizeState(data){
   // 仅迁移旧数据一次；之后手动修改的在岗状态和班组不再被重置。
   if((Number(data.schemaVersion) || 0)<4) migrateShiXingQiTransfer(data);
   data.schemaVersion = DATA_SCHEMA_VERSION;
-  data.reportDate = getTodayISO();
+  data.reportDate = data.reportDate || getTodayISO();
   return data;
 }
 
@@ -538,7 +1515,10 @@ function loadState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
     if(raw){
-      const normalized = normalizeState(JSON.parse(raw));
+      const saved = JSON.parse(raw);
+      const normalized = Number(saved.schemaVersion) < DATA_SCHEMA_VERSION
+        ? defaultData()
+        : normalizeState(saved);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
       return normalized;
     }
